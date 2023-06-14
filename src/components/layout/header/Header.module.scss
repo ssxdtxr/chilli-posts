@@ -28,6 +28,19 @@
         gap: 14px;
         align-items: center;
       }
+      .exit {
+        cursor: pointer;
+
+        padding: 7px 10px;
+        border-radius: 7px;
+        border: 1px solid inherit;
+        &:hover {
+          background-color: #BF5D6F;
+        }
+        &:active {
+          background-color: red;
+        }
+      }
     }
   }
 }

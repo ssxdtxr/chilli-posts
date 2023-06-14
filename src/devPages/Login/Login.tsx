@@ -1,20 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Layout } from '@/components/layout/Layout';
 import styles from './Login.module.scss';
+import { ValidationError } from '@/components/UI/ValidationError/ValidationError';
+import { userService } from '../../services/user.service';
+import { useSnackbar } from 'notistack';
+import Cookies from 'js-cookie';
 
-type Inputs = {
+export interface ILoginForm {
   email: string,
   password: string
 };
 export const Login = () => {
-  const { register, formState: { errors, isValid }, handleSubmit, reset } = useForm<Inputs>({
-    mode: 'onBlur'
+  const { enqueueSnackbar } = useSnackbar();
+  const router = useRouter();
+  const { register, formState: { errors, isValid }, handleSubmit, reset, setError } = useForm<ILoginForm>({
+    mode: 'onBlur',
   });
 
-  const onSubmit:SubmitHandler<Inputs> = (data) => {
-    alert(JSON.stringify(data));
-    reset()
+  useEffect(() => {
+    if (Cookies.get('jwt')) {
+      router.push('/');
+    }
+  }, []);
+
+  const onSubmit: SubmitHandler<ILoginForm> = async (data) => {
+    if (!data.email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i)) {
+      return setError('email', { message: 'Неверный формат email адреса' });
+    }
+    try {
+      const { data: loginData } = await userService.login(data);
+      Cookies.set('jwt', loginData.token);
+      reset();
+      enqueueSnackbar('Вы успешно авторизовались', {
+        variant: 'success',
+      });
+      router.push('/');
+    } catch (error: any) {
+      enqueueSnackbar('Пользователь с такими данными не найден', {
+        variant: 'error',
+      });
+    }
   };
   return (
     <Layout title='Login'>
@@ -27,9 +54,7 @@ export const Login = () => {
               required: 'Email обязательный',
             })}
           />
-          <div>
-            {errors.email && <div className={styles.error}>{errors.email.message || 'Email обязательный'}</div>}
-          </div>
+          {errors.email && <ValidationError error={errors.email.message as string} />}
         </label>
         <label>
           <input
@@ -39,9 +64,7 @@ export const Login = () => {
               required: 'Пароль обязательный',
             })}
           />
-          <div>
-            {errors.password && <div className={styles.error}>{errors.password.message || 'Пароль обязательный'}</div>}
-          </div>
+          {errors.password && <ValidationError error={errors.password.message as string} />}
         </label>
         <button disabled={!isValid}>Войти</button>
       </form>

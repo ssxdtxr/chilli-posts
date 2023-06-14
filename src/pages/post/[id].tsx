@@ -1,9 +1,8 @@
 import { FC } from 'react';
 import { http } from '@/http/http';
-import { IPost } from '@/types/IPost';
 
 export async function getServerSideProps(context: any) {
-  const { data: postData } = await http.get('/post/', { params: { post: context.query.id } });
+  const { data: postData } = await http.get(`/post/${context.query.id}`);
   return { props: { postData } };
 }
 
