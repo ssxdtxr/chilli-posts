@@ -1,0 +1,58 @@
+.post {
+  background: rgba(242, 242, 255, 0.04);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 7px;
+  color: #F2F2FF;
+  display: grid;
+  grid-template-rows: 1fr;
+  .img {
+    border-radius: 5px;
+  }
+  .info {
+    padding: 10px 14px 14px;
+    .tags {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 10px;
+      .tag {
+        padding: 4px;
+        font-size: 10px;
+        background-color: #667A98;
+        border-radius: 5px;
+      }
+    }
+    .title {
+      margin-bottom: 14px;
+      font-size: 14px;
+    }
+    .descr {
+      font-size: 12px;
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+      height: 45px;
+    }
+    .moreInfo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      .readMore {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        font-weight: 600;
+        color: #fff;
+      }
+      .time {
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+    }
+
+  }
+}
