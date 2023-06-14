@@ -22,3 +22,8 @@ button {
 ul {
   list-style: none;
 }
+
+input[type="password"] {
+  color: #fff;
+  fill: #fff;
+}

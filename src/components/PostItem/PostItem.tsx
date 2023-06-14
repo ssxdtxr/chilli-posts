@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import styles from './Post.module.scss';
+import styles from './PostItem.module.scss';
 import Image from 'next/image';
 import { IPost } from '@/types/IPost';
 import { GlobalSvgSelector } from '@/assets/icons/GlobalSvgSelector';
@@ -10,7 +10,7 @@ interface IPostItem {
   post: IPost;
 }
 
-export const Post: FC<IPostItem> = ({ post }) => {
+export const PostItem: FC<IPostItem> = ({ post }) => {
   const { image, tags, title, description, created_at } = post;
   return (
     <div className={styles.post}>

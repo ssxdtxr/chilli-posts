@@ -1,0 +1,34 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 216px auto;
+  max-width: 730px;
+  gap: 30px;
+  input {
+    width: 100%;
+    padding: 12px 11px;
+    border-radius: 5px;
+    background-color: #33363D;
+    color: #fff;
+    &::placeholder {
+      color: #fff;
+    }
+  }
+  button {
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 5px;
+    background-color: #667A98;
+    color: #fff;
+    &:disabled {
+      background-color: #33363D;
+    }
+    &:active {
+      background-color: #33363D;
+    }
+  }
+  .error {
+    margin-top: 7px;
+    color: #BF5D6F;
+  }
+}
