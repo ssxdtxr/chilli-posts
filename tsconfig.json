@@ -18,25 +18,26 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "compilerOptions": {
-      "baseUrl": "src/",
-      "paths": {
-        "@/assets/*": [
-          "assets/*"
-        ],
-        "@/components/*": [
-          "components/*"
-        ],
-        "@/http/*": [
-          "http/*"
-        ],
-        "@/types/*": [
-          "types/*"
-        ],
-        "@/pages/*": [
-          "pages/*"
-        ]
-      }
+    "baseUrl": "src",
+    "paths": {
+      "@/assets/*": [
+        "assets/*"
+      ],
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/http/*": [
+        "http/*"
+      ],
+      "@/types/*": [
+        "types/*"
+      ],
+      "@/pages/*": [
+        "pages/*"
+      ],
+      "@/devPages/*": [
+        "devPages/*"
+      ]
     }
   },
   "include": [

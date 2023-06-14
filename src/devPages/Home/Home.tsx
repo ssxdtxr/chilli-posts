@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { IHomePage } from '@/pages';
+import { IHomePage } from '@/pages/index';
 import { Layout } from '@/components/layout/Layout';
 import { PostItem } from '@/components/PostItem/PostItem';
 import styles from './Home.module.scss';
