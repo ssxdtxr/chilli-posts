@@ -12,5 +12,13 @@
   align-items: center;
   font-size: 16px;
   margin-bottom: 25px;
-  margin-left: 92%;
+  margin-left: 91%;
+  padding: 7px 10px;
+  border-radius: 10px;
+  &:hover {
+    background-color: lighten(#222428, 10%);
+  }
+  &:active {
+    background-color: #667A98;
+  }
 }
