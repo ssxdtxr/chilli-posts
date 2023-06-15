@@ -16,7 +16,7 @@ export const Login = () => {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const { register, formState: { errors, isValid }, handleSubmit, reset, setError } = useForm<ILoginForm>({
-    mode: 'onBlur',
+    mode: 'onSubmit',
   });
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export const Login = () => {
           />
           {errors.password && <ValidationError error={errors.password.message as string} />}
         </label>
-        <button disabled={!isValid}>Войти</button>
+        <button disabl  ed={!isValid}>Войти</button>
       </form>
     </Layout>
   );
