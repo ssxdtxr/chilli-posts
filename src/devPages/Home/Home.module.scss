@@ -3,22 +3,36 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 50px;
   margin-bottom: 50px;
+  @media screen and (max-width: 375px) {
+    grid-template-columns: 1fr;
+
+  }
 }
 
 .filters {
-  cursor: pointer;
   display: flex;
-  gap: 15px;
-  align-items: center;
-  font-size: 16px;
+  justify-content: flex-end;
+  cursor: pointer;
+  text-align: right;
   margin-bottom: 25px;
-  margin-left: 91%;
-  padding: 7px 10px;
-  border-radius: 10px;
-  &:hover {
-    background-color: lighten(#222428, 10%);
+
+  .filtersItem {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    gap: 15px;
+    padding: 7px 10px;
+    border-radius: 10px;
+    font-size: 16px;
+
+    &:hover {
+      background-color: lighten(#222428, 10%);
+    }
+
+    &:active {
+      background-color: #667A98;
+    }
   }
-  &:active {
-    background-color: #667A98;
-  }
+
+
 }

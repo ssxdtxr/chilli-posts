@@ -1,0 +1,50 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  background-color: #33363D;
+  width: max-content;
+  height: 100vh;
+
+  .info {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    .img {
+      border-radius: 10px;
+    }
+    .mainInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .topSide {
+        .title {
+          font-weight: 700;
+          font-size: 20px;
+          margin-bottom: 12px;
+        }
+        .tags {
+          display: flex;
+          gap: 7px;
+          margin-bottom: 10px;
+
+          .tag {
+            padding: 4px;
+            font-size: 10px;
+            background-color: #667A98;
+            border-radius: 5px;
+          }
+        }
+      }
+      .bottomSide {
+        font-size: 10px;
+        font-weight: 400;
+        color: #b9bac5;
+        .auth {
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+
+}

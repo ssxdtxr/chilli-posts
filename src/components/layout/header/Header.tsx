@@ -52,7 +52,7 @@ export const Header = () => {
                 <Link href='/'>
                   <div className={styles.leftSide}>
                     <GlobalSvgSelector id='logo' />
-                    <div className={styles.title}>CHILLIPOSTS</div>
+                    <div className={styles.title}>CHILLI POSTS</div>
                   </div>
                 </Link>
                 <div className={styles.rightSide}>

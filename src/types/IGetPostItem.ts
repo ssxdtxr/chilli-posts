@@ -1,4 +1,4 @@
-export interface IPost {
+export interface IGetPostItem {
   id: number;
   title: string;
   description: string;
