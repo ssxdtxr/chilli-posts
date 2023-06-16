@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import styles from './PostItem.module.scss';
 import Image from 'next/image';
-import { IPost } from '@/types/IPost';
+import { IGetPostItem } from '@/types/IGetPostItem';
 import { GlobalSvgSelector } from '@/assets/icons/GlobalSvgSelector';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import 'dayjs/locale/ru';
 
 interface IPostItem {
-  post: IPost;
+  post: IGetPostItem;
 }
 
 export const PostItem: FC<IPostItem> = ({ post }) => {
@@ -40,7 +40,7 @@ export const PostItem: FC<IPostItem> = ({ post }) => {
           </div>
           <time className={styles.time}>
             <GlobalSvgSelector id='clock' />
-            {dayjs(created_at).locale('ru').format('DD MMM YYYY HH:mm')}
+            {dayjs(created_at).locale('ru').format('DD MMMM YYYY HH:mm')}
           </time>
         </div>
       </div>

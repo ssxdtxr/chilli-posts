@@ -1,5 +1,5 @@
-import { IPost } from '@/types/IPost';
+import { IGetPostItem } from '@/types/IGetPostItem';
 
 export interface IPosts {
-  data: IPost[]
+  data: IGetPostItem[]
 }

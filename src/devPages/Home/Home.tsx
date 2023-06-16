@@ -14,9 +14,9 @@ export const Home: FC<IHomePage> = ({ posts }) => {
   const router = useRouter();
   useEffect(() => {
     if (!Cookies.get('jwt')) {
-      router.push('/login')
+      router.push('/login');
     }
-  },[])
+  }, []);
   return (
     <Layout title='Chilli Posts'>
       {
@@ -26,15 +26,18 @@ export const Home: FC<IHomePage> = ({ posts }) => {
           ''
       }
       <Container>
-        <div onClick={() => setIsOpenFilters(!isOpenFilters)} className={styles.filters}>
-          Фильтры
-          <GlobalSvgSelector id='filters' />
+        <div className={styles.filters}>
+          <div onClick={() => setIsOpenFilters(!isOpenFilters)} className={styles.filtersItem}>
+            Фильтры
+            <GlobalSvgSelector id='filters' />
+          </div>
+
         </div>
-        <div className={styles.postsList}>
+        <section className={styles.postsList}>
           {
             posts.data.map(post => <PostItem key={post.id} post={post} />)
           }
-        </div>
+        </section>
       </Container>
     </Layout>
   );
