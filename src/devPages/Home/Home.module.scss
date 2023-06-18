@@ -10,7 +10,7 @@
     gap: 32px;
   }
   @include tabletMedia {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 28px;
   }
   @include mobileMedia {
