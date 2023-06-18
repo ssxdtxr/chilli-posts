@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { IHomePage } from '@/pages/index';
 import { Layout } from '@/components/layout/Layout';
 import { PostItem } from '@/components/PostItem/PostItem';
@@ -10,8 +10,8 @@ import styles from './Home.module.scss';
 
 export const Home: FC<IHomePage> = ({ posts }) => {
   const [isOpenFilters, setIsOpenFilters] = useState<boolean>(false);
-  const [postsData, setPostsData] = useState<IGetPostItem[]>(posts.data);
-
+  const [postsData, setPostsData] = useState<IGetPostItem[]>([]);
+  useEffect(() => setPostsData(posts.data), [])
   // @ts-ignore
   const colors = [...new Set(posts.data.flatMap(post => post.tags))];
 
