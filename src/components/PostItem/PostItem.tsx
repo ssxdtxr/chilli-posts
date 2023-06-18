@@ -1,12 +1,12 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import styles from './PostItem.module.scss';
 import Image from 'next/image';
 import { IGetPostItem } from '@/types/IGetPostItem';
 import { GlobalSvgSelector } from '@/assets/icons/GlobalSvgSelector';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
-import { ModalContext } from '../../context/ModalContext';
-import { Post } from '@/devPages/Post/Post';
+import { ModalProvider } from '@/context/ModalContext';
+import { Post } from '@/components/UI/models/Post/Post';
 
 interface IPostItem {
   post: IGetPostItem;
@@ -14,15 +14,26 @@ interface IPostItem {
 
 export const PostItem: FC<IPostItem> = ({ post }) => {
   const { image, tags, title, description, created_at, id } = post;
-  const { toggleModal, isModalOpen, dataModel } = useContext(ModalContext);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
   return (
     <>
-      {
-        isModalOpen && <Post postData={dataModel} />
-      }
+      <ModalProvider isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+        <Post id={id} />
+      </ModalProvider>
       <article className={styles.post}>
-        <Image onClick={() => toggleModal(id)} className={styles.img} width={328} height={222} src={image}
-               alt='image' />
+        <Image
+          onClick={openModal}
+          className={styles.img}
+          width={328}
+          height={222}
+          src={image}
+          alt={title}
+
+        />
         <div className={styles.info}>
           <div className={styles.tags}>
             {
@@ -32,7 +43,7 @@ export const PostItem: FC<IPostItem> = ({ post }) => {
                 </div>))
             }
           </div>
-          <div onClick={() => toggleModal(id)} className={styles.title}>
+          <div onClick={openModal} className={styles.title}>
             {title}
           </div>
           <p className={styles.descr}>

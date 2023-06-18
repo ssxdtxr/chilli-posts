@@ -1,45 +1,31 @@
-import { createContext, FC, ReactNode, useState } from 'react';
-import { postService } from '@/services/post.service';
+import { createContext, FC, ReactNode } from 'react';
 
-interface IModalContext {
-  isModalOpen: boolean;
-  toggleModal: (id: number) => void;
-  dataModel: any | '';
-}
+import { AnimatePresence, motion } from 'framer-motion';
+import { useOutsideClick } from '@/hooks/useClickOutside';
+import { Blur } from '@/components/UI/Blur/Blur';
 
-export const ModalContext = createContext<IModalContext>({
-  isModalOpen: false,
-  toggleModal: () => {
-  },
-  dataModel: null,
-});
 
 interface IModalProvider {
   children: ReactNode;
+  isModalOpen: boolean;
+  setIsModalOpen: (value: boolean) => void;
 }
 
-export const ModalProvider: FC<IModalProvider> = ({ children }) => {
-  const [isModalOpen, setModalOpen] = useState(false);
-  let dataModel = null;
-
-  const toggleModal = async (id: number) => {
-    if (!isModalOpen) {
-      setModalOpen(true);
-      try {
-        const { data: post } = await postService.getPost(id);
-        dataModel = post;
-        console.log(dataModel);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      setModalOpen(false);
-    }
-  };
-
+export const ModalProvider: FC<IModalProvider> = ({ children, setIsModalOpen, isModalOpen }) => {
+  const ref = useOutsideClick(() => {
+    setIsModalOpen(false);
+  });
   return (
-    <ModalContext.Provider value={{ isModalOpen, toggleModal, dataModel }}>
-      {children}
-    </ModalContext.Provider>
+    <AnimatePresence>
+      {
+        isModalOpen &&
+        <Blur>
+          <motion.div ref={ref} initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -100 }}>
+            {children}
+          </motion.div>
+        </Blur>
+
+      }
+    </AnimatePresence>
   );
 };

@@ -1,29 +1,47 @@
+@import "@/assets/styles/mixins";
+
 .card {
   display: flex;
   flex-direction: column;
   padding: 28px;
   background-color: #33363D;
-  width: max-content;
+  width: 40%;
   height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  @include smallMobileMedia {
+    width: 80%;
+  }
 
   .info {
     display: flex;
     gap: 15px;
     margin-bottom: 30px;
+    @include smallMobileMedia {
+      flex-direction: column;
+    }
+
     .img {
       cursor: pointer;
       border-radius: 10px;
+      @include smallMobileMedia {
+        width: 100%;
+      }
     }
+
     .mainInfo {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
       .topSide {
         .title {
           font-weight: 700;
           font-size: 20px;
           margin-bottom: 12px;
         }
+
         .tags {
           display: flex;
           gap: 7px;
@@ -37,10 +55,12 @@
           }
         }
       }
+
       .bottomSide {
         font-size: 10px;
         font-weight: 400;
         color: #b9bac5;
+
         .auth {
           margin-bottom: 12px;
         }

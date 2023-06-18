@@ -27,7 +27,7 @@ export const getAuthToken = (): string => {
 
 export const AuthProvider = ({children}: { children: React.ReactNode }) => {
     const [jwt, setJwt] = useState<string>(getAuthToken());
-
+    console.log(jwt);
     const login = (token: string) => {
         Cookies.set(COOKIE_NAME, token);
         setJwt(token);
@@ -58,4 +58,8 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
             {children}
         </AuthContext.Provider>
     );
+};
+
+export const useAuth = () => {
+    return useContext(AuthContext);
 };
