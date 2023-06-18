@@ -20,7 +20,7 @@ export const ModalProvider: FC<IModalProvider> = ({ children, setIsModalOpen, is
       {
         isModalOpen &&
         <Blur>
-          <motion.div ref={ref} initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -100 }}>
+          <motion.div ref={ref} initial={{ x: -400, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -700 }}>
             {children}
           </motion.div>
         </Blur>
