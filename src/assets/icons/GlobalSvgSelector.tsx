@@ -87,6 +87,16 @@ export const GlobalSvgSelector = ({ id }: IGlobalSvgSelector) => {
           <path d='M3 6H10' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
           <path d='M10 8L10 4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
         </svg>
+      );
+    case 'delete':
+      return (
+        <svg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M9 3H3V10C3 10.2761 3.22386 10.5 3.5 10.5H8.5C8.77614 10.5 9 10.2761 9 10V3Z' stroke='#F2F2FF'
+                stroke-linecap='round' stroke-linejoin='round' />
+          <path d='M2 3H10' stroke='#F2F2FF' stroke-linecap='round' stroke-linejoin='round' />
+          <path d='M7.5 1.5H4.5C4.22386 1.5 4 1.72386 4 2V3H8V2C8 1.72386 7.77614 1.5 7.5 1.5Z' stroke='#F2F2FF'
+                stroke-linecap='round' stroke-linejoin='round' />
+        </svg>
 
       );
     default:

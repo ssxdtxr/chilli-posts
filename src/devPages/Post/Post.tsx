@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import styles from './Post.module.scss';
 import Image from 'next/image';
 import { GlobalSvgSelector } from '@/assets/icons/GlobalSvgSelector';
@@ -11,9 +11,8 @@ export interface IPostItem {
 }
 
 export const Post: FC<IPostItem> = ({ postData }) => {
-  console.log(postData);
   const { image, tags, title, description, created_at } = postData;
-  console.log(title);
+
   return (
     <article className={styles.card}>
       <div className={styles.info}>
@@ -33,11 +32,9 @@ export const Post: FC<IPostItem> = ({ postData }) => {
 
           <div className={styles.bottomSide}>
             <div className={styles.auth}>Автор: @chillicode</div>
-            <time>
-              <time className={styles.time}>
-                <GlobalSvgSelector id='clock' />
-                {dayjs(created_at).locale('ru').format('DD MMMM YYYY HH:mm')}
-              </time>
+            <time className={styles.time}>
+              <GlobalSvgSelector id='clock' />
+              {dayjs(created_at).locale('ru').format('DD MMMM YYYY HH:mm')}
             </time>
           </div>
         </section>

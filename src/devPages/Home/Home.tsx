@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { IHomePage } from '@/pages/index';
 import { Layout } from '@/components/layout/Layout';
 import { PostItem } from '@/components/PostItem/PostItem';
@@ -8,10 +8,15 @@ import { GlobalSvgSelector } from '@/assets/icons/GlobalSvgSelector';
 import { Filters } from '@/components/Filters/Filters';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
+import { ModalContext } from '../../context/ModalContext';
+import { Post } from '@/devPages/Post/Post';
 
 export const Home: FC<IHomePage> = ({ posts }) => {
-  const [isOpenFilters, setIsOpenFilters] = useState<boolean>(false);
   const router = useRouter();
+  const [isOpenFilters, setIsOpenFilters] = useState<boolean>(false);
+  const { toggleModal, isModalOpen, dataModel } = useContext(ModalContext);
+  const colors = [...new Set<string>(posts.data.map(post => post.tags).flatMap(color => color.map(item => item.title)))]
+
   useEffect(() => {
     if (!Cookies.get('jwt')) {
       router.push('/login');
@@ -19,11 +24,10 @@ export const Home: FC<IHomePage> = ({ posts }) => {
   }, []);
   return (
     <Layout title='Chilli Posts'>
+
       {
-        isOpenFilters ?
-          <Filters />
-          :
-          ''
+        isOpenFilters &&
+          <Filters colors={colors} />
       }
       <Container>
         <div className={styles.filters}>
@@ -31,7 +35,6 @@ export const Home: FC<IHomePage> = ({ posts }) => {
             Фильтры
             <GlobalSvgSelector id='filters' />
           </div>
-
         </div>
         <section className={styles.postsList}>
           {
