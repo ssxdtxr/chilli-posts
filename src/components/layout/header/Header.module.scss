@@ -1,3 +1,4 @@
+@import "assets/styles/mixins";
 .header {
   background-color: #222428;
   font-size: 16px;
@@ -25,9 +26,14 @@
       display: flex;
       gap: 48px;
       align-items: center;
-      @media screen and (max-width: 375px) {
+
+      @include smallMobileMedia {
         gap: 10px;
       }
+      @include mobileMedia {
+        gap: 10px;
+      }
+
       .user {
         display: flex;
         gap: 10px;

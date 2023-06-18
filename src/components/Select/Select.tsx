@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import styles from './Select.module.scss';
 import cn from 'classnames';
 import { GlobalSvgSelector } from '@/assets/icons/GlobalSvgSelector';
+import { useOutsideClick } from '@/hooks/useClickOutside';
 
 const activeVariants = {
   visible: (custom: number) => ({
@@ -29,8 +30,12 @@ interface ISelect {
 export const Select: FC<ISelect> = ({ colors, setSelectedColor }) => {
   const [active, setActive] = useState<boolean>(false);
   const [color, setColor] = useState<{id: number, title: string}[]>([]);
+  const ref = useOutsideClick(() => {
+    setActive(false);
+  });
+
   const onActive = (): void => {
-    setActive(!active);
+    setActive(true);
   };
   const handleOptionClick = (colorItem: {id: number, title: string}) => {
     if (color.includes(colorItem)) {
@@ -47,7 +52,7 @@ export const Select: FC<ISelect> = ({ colors, setSelectedColor }) => {
 
   return (
     <AnimatePresence>
-      <div onClick={onActive} className={cn(styles.selectHeader, active)}>
+      <div ref={ref} onClick={onActive} className={cn(styles.selectHeader, active)}>
           <span className={styles.selectCurr}>
             {
               color.length ?

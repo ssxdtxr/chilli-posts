@@ -5,7 +5,7 @@
   flex-direction: column;
   padding: 28px;
   background-color: #33363D;
-  width: 40%;
+  width: 35%;
   height: 100vh;
   position: absolute;
   left: 0;
@@ -13,22 +13,37 @@
   @include smallMobileMedia {
     width: 80%;
   }
+  @include tabletMedia {
+    width: 80%;
+  }
+
 
   .info {
     display: flex;
     gap: 15px;
     margin-bottom: 30px;
+
+    .image {
+      .img {
+        cursor: pointer;
+        border-radius: 10px;
+        @include smallMobileMedia {
+          width: 100%;
+        }
+        @include tabletMedia {
+          width: 300px;
+          height: 200px;
+        }
+      }
+    }
+
     @include smallMobileMedia {
       flex-direction: column;
     }
-
-    .img {
-      cursor: pointer;
-      border-radius: 10px;
-      @include smallMobileMedia {
-        width: 100%;
-      }
+    @include tabletMedia {
+      flex-direction: column;
     }
+
 
     .mainInfo {
       display: flex;

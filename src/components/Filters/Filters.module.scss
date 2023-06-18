@@ -1,3 +1,4 @@
+@import "assets/styles/mixins";
 .filters {
   position: fixed;
   top: 0;
@@ -6,9 +7,14 @@
   box-shadow: 25px 4px 30px rgba(0, 0, 0, 0.25);
   height: 100vh;
   padding: 28px;
-  @media screen and (max-width: 375px) {
+  @include smallMobileMedia {
     width: 85%;
     padding: 12px;
+  }
+  @include mobileMedia {
+    gap: 10px;
+    width: 85%;
+
   }
 
   .title {
@@ -40,7 +46,7 @@
         }
       }
 
-      @media screen and (max-width: 375px) {
+      @include tabletMedia {
         gap: 10px;
       }
     }

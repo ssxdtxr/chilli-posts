@@ -11,7 +11,6 @@ const updateHeaders = () => {
       return config;
     }, (error) => Promise.reject(error));
 };
-console.log(Cookies.get('jwt'));
 
 export const http = axios.create({
   baseURL: 'https://api.posts.chillicode.ru',

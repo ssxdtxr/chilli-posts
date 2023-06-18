@@ -5,9 +5,19 @@
   color: #F2F2FF;
   display: grid;
   grid-template-rows: 1fr;
-  .img {
-    border-radius: 5px;
+  .image {
+    position: relative;
+    height: 222px;
+    .img {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      right: 0;
+      left: 0;
+      border-radius: 5px;
+    }
   }
+
   .info {
     padding: 10px 14px 14px;
     .tags {
