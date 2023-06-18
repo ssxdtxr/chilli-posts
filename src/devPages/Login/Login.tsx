@@ -4,10 +4,10 @@ import {SubmitHandler, useForm} from 'react-hook-form';
 import {Layout} from '@/components/layout/Layout';
 import styles from './Login.module.scss';
 import {ValidationError} from '@/components/UI/ValidationError/ValidationError';
-import {userService} from '../../services/user.service';
+import {userService} from '@/services/user.service';
 import {useSnackbar} from 'notistack';
-import Cookies from 'js-cookie';
 import {Container} from "@/components/container/Container";
+import { useAuth } from '@/hooks/useAuth';
 
 export interface ILoginForm {
     email: string,
@@ -16,15 +16,10 @@ export interface ILoginForm {
 export const Login = () => {
     const {enqueueSnackbar} = useSnackbar();
     const router = useRouter();
+    const {login} = useAuth()
     const {register, formState: {errors, isValid}, handleSubmit, reset, setError} = useForm<ILoginForm>({
         mode: 'onSubmit',
     });
-
-    useEffect(() => {
-        if (Cookies.get('jwt')) {
-            router.push('/');
-        }
-    }, []);
 
     const onSubmit: SubmitHandler<ILoginForm> = async (data) => {
         if (!data.email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i)) {
@@ -32,7 +27,7 @@ export const Login = () => {
         }
         try {
             const {data: loginData} = await userService.login(data);
-            Cookies.set('jwt', loginData.token);
+            login(loginData.token)
             reset();
             enqueueSnackbar('Вы успешно авторизовались', {
                 variant: 'success',

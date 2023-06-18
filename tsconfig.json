@@ -23,24 +23,14 @@
       "@/assets/*": [
         "assets/*"
       ],
-      "@/components/*": [
-        "components/*"
-      ],
-      "@/http/*": [
-        "http/*"
-      ],
-      "@/types/*": [
-        "types/*"
-      ],
-      "@/pages/*": [
-        "pages/*"
-      ],
-      "@/devPages/*": [
-        "devPages/*"
-      ],
-      "@/services/*": [
-        "services/*"
-      ]
+      "@/components/*": ["components/*"],
+      "@/http/*": ["http/*"],
+      "@/types/*": ["types/*"],
+      "@/pages/*": ["pages/*"],
+      "@/devPages/*": ["devPages/*"],
+      "@/services/*": ["services/*"],
+      "@/context/*": ["context/*"],
+      "@/hooks/*": ["hooks/*"]
     }
   },
   "include": [

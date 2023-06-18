@@ -1,72 +1,57 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container } from '@/components/container/Container';
 import styles from './Header.module.scss';
 import { GlobalSvgSelector } from '@/assets/icons/GlobalSvgSelector';
 import Link from 'next/link';
-import { userService } from '../../../services/user.service';
+import { userService } from '@/services/user.service';
 import { useRouter } from 'next/router';
-import Cookies from 'js-cookie';
 import { useSnackbar } from 'notistack';
+import { useAuth } from '@/hooks/useAuth';
 
 
 export const Header = () => {
-  const [isCookies, setIsCookies] = useState<boolean>(!Cookies.get('jwt'));
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
+  const { logout, jwt } = useAuth();
   const onExit = async () => {
-    Cookies.remove('jwt');
-    router.push('/login');
-    enqueueSnackbar('Вы успешно разлогинились', {
-      variant: 'success'
-    })
-    setIsCookies(false)
-    // try {
-    //   const { data } = await userService.logOut();
-    //   setIsCookies(false)
-    // } catch (error) {
-    //   console.log(error);
-    // }
+
+    try {
+      const { data } = await userService.logOut();
+      logout();
+      router.push('/login');
+      enqueueSnackbar('Вы успешно разлогинились', {
+        variant: 'success',
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
-    <>
-      {
 
-        isCookies ?
-          <div className={styles.header}>
-            <Container>
-              <div className={styles.wrapper}>
-                <Link href='/'>
-                  <div className={styles.leftSide}>
-                    <GlobalSvgSelector id='logo' />
-                    <div className={styles.title}>CHILLIPOSTS</div>
-                  </div>
-                </Link>
+    <header className={styles.header}>
+      <Container>
+        <nav className={styles.wrapper}>
+          <Link href='/login'>
+            <div className={styles.leftSide}>
+              <GlobalSvgSelector id='logo' />
+              <div className={styles.title}>CHILLI POSTS</div>
+            </div>
+          </Link>
+          {
+            jwt ? <div className={styles.rightSide}>
+              <div className={styles.user}>
+                <GlobalSvgSelector id='user' />
+                <div className={styles.name}>MonFriK</div>
               </div>
-            </Container>
-          </div>
-          :
-          <div className={styles.header}>
-            <Container>
-              <div className={styles.wrapper}>
-                <Link href='/'>
-                  <div className={styles.leftSide}>
-                    <GlobalSvgSelector id='logo' />
-                    <div className={styles.title}>CHILLI POSTS</div>
-                  </div>
-                </Link>
-                <div className={styles.rightSide}>
-                  <div className={styles.user}>
-                    <GlobalSvgSelector id='user' />
-                    <div className={styles.name}>MonFriK</div>
-                  </div>
-                  <div onClick={() => onExit()} className={styles.exit}>Выйти</div>
-                </div>
-              </div>
-            </Container>
-          </div>
-      }
-    </>
+              <div onClick={() => onExit()} className={styles.exit}>Выйти</div>
+            </div> : ''
+          }
+
+        </nav>
+      </Container>
+    </header>
   );
 };
+
 

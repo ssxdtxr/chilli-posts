@@ -1,11 +1,26 @@
+@import "@/assets/styles/mixins";
+
 .postsList {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 50px;
   margin-bottom: 50px;
-  @media screen and (max-width: 375px) {
-    grid-template-columns: 1fr;
+  @include smallDesktopMedia {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
   }
+  @include tabletMedia {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  @include mobileMedia {
+    gap: 20px;
+  }
+  @include smallMobileMedia {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
 }
 
 .filters {

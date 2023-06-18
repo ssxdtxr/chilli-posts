@@ -1,48 +1,47 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { IHomePage } from '@/pages/index';
 import { Layout } from '@/components/layout/Layout';
 import { PostItem } from '@/components/PostItem/PostItem';
-import styles from './Home.module.scss';
 import { Container } from '@/components/container/Container';
 import { GlobalSvgSelector } from '@/assets/icons/GlobalSvgSelector';
+import { IGetPostItem } from '@/types/IGetPostItem';
 import { Filters } from '@/components/Filters/Filters';
-import { useRouter } from 'next/router';
-import Cookies from 'js-cookie';
-import { ModalContext } from '../../context/ModalContext';
-import { Post } from '@/devPages/Post/Post';
+import styles from './Home.module.scss';
 
 export const Home: FC<IHomePage> = ({ posts }) => {
-  const router = useRouter();
   const [isOpenFilters, setIsOpenFilters] = useState<boolean>(false);
-  const { toggleModal, isModalOpen, dataModel } = useContext(ModalContext);
-  const colors = [...new Set<string>(posts.data.map(post => post.tags).flatMap(color => color.map(item => item.title)))]
+  const [postsData, setPostsData] = useState<IGetPostItem[]>(posts.data);
 
-  useEffect(() => {
-    if (!Cookies.get('jwt')) {
-      router.push('/login');
-    }
-  }, []);
+  // @ts-ignore
+  const colors = [...new Set(posts.data.flatMap(post => post.tags))];
+
   return (
-    <Layout title='Chilli Posts'>
-
+    <>
       {
-        isOpenFilters &&
-          <Filters colors={colors} />
+        isOpenFilters ? <Filters
+            colors={colors}
+            setIsOpenFilters={setIsOpenFilters}
+            setPostsData={setPostsData}
+            postsData={postsData} />
+          :
+          ''
       }
-      <Container>
-        <div className={styles.filters}>
-          <div onClick={() => setIsOpenFilters(!isOpenFilters)} className={styles.filtersItem}>
-            Фильтры
-            <GlobalSvgSelector id='filters' />
+      <Layout title='Chilli Posts'>
+        <Container>
+          <div className={styles.filters}>
+            <div onClick={() => setIsOpenFilters(true)} className={styles.filtersItem}>
+              Фильтры
+              <GlobalSvgSelector id='filters' />
+            </div>
           </div>
-        </div>
-        <section className={styles.postsList}>
-          {
-            posts.data.map(post => <PostItem key={post.id} post={post} />)
-          }
-        </section>
-      </Container>
-    </Layout>
+          <section className={styles.postsList}>
+            {
+              postsData.map(post => <PostItem key={post.id} post={post} />)
+            }
+          </section>
+        </Container>
+      </Layout>
+    </>
   );
 };
 
