@@ -16,6 +16,7 @@ export const Filters: FC<IFilters> = ({ colors, setIsOpenFilters, setPostsData, 
   const [selectedColor, setSelectedColor] = useState<{id: number, title: string}[]>([]);
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
+
   const handleDateFromChange = (event: ChangeEvent<HTMLInputElement>) => {
     setDateFrom(event.target.value);
   };
@@ -30,7 +31,6 @@ export const Filters: FC<IFilters> = ({ colors, setIsOpenFilters, setPostsData, 
 
   const changePosts = () => {
     const idSelectedColor = selectedColor.map(item =>item.id)
-    console.log(idSelectedColor);
     const newPosts = postsData.filter(item => (
       item.created_at >= dateFrom &&
       item.created_at <= dateTo &&
@@ -45,7 +45,12 @@ export const Filters: FC<IFilters> = ({ colors, setIsOpenFilters, setPostsData, 
         <div className={styles.items}>
           <Select colors={colors} setSelectedColor={setSelectedColor} />
           <div className={styles.date}>
-            <input placeholder='Дата от' type='date' value={dateFrom} onChange={handleDateFromChange}
+            <input
+              placeholder='Дата от'
+              type='date'
+              value={dateFrom}
+              onChange={handleDateFromChange}
+
                    className={styles.dateFrom} />
             <span>-</span>
             <input placeholder='Дата до' type='date' value={dateTo} onChange={handleDateToChange}
