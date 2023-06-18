@@ -25,15 +25,16 @@ export const PostItem: FC<IPostItem> = ({ post }) => {
         <Post id={id} />
       </ModalProvider>
       <article className={styles.post}>
-        <Image
-          onClick={openModal}
-          className={styles.img}
-          width={328}
-          height={222}
-          src={image}
-          alt={title}
-
-        />
+        <div className={styles.image}>
+          <Image
+            onClick={openModal}
+            className={styles.img}
+            width={328}
+            height={222}
+            src={image}
+            alt={title}
+          />
+        </div>
         <div className={styles.info}>
           <div className={styles.tags}>
             {
